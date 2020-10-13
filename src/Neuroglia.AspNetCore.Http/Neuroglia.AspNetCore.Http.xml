@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Neuroglia.AspNetCore.Http</name>
+    </assembly>
+    <members>
+        <member name="T:Neuroglia.AspNetCore.Http.IIstioHeadersAccessor">
+            <summary>
+            Defines the fundamentals of a service used to access Istio headers from the current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>
+            </summary>
+        </member>
+        <member name="P:Neuroglia.AspNetCore.Http.IIstioHeadersAccessor.IstioHeaders">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.IDictionary`2"/> containing incoming Istio headers
+            </summary>
+        </member>
+        <member name="T:Neuroglia.AspNetCore.Http.IServiceCollectionExtensions">
+            <summary>
+            Defines extensions for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>s
+            </summary>
+        </member>
+        <member name="M:Neuroglia.AspNetCore.Http.IServiceCollectionExtensions.AddIstioHeadersPropagation(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Istio header propagation
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to configure</param>
+            <returns>The configured <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
+        </member>
+        <member name="T:Neuroglia.AspNetCore.Http.IstioHeaders">
+            <summary>
+            Exposes constants about Istio headers
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.REQUEST_ID">
+            <summary>
+            Gets the name of the 'x-request-id' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.B3_TRACE_ID">
+            <summary>
+            Gets the name of the 'x-b3-traceid' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.B3_SPAN_ID">
+            <summary>
+            Gets the name of the 'x-b3-spanid' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.B3_PARENT_SPAN_ID">
+            <summary>
+            Gets the name of the 'x-b3-parentspanid' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.B3_SAMPLED">
+            <summary>
+            Gets the name of the 'x-b3-sampled' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.B3_FLAGS">
+            <summary>
+            Gets the name of the 'x-b3-flags' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.B3">
+            <summary>
+            Gets the name of the 'b3' header
+            </summary>
+        </member>
+        <member name="F:Neuroglia.AspNetCore.Http.IstioHeaders.OT_SPAN_CONTEXT">
+            <summary>
+            Gets the name of the 'x-ot-span-context' header
+            </summary>
+        </member>
+        <member name="T:Neuroglia.AspNetCore.Http.IstioHeadersAccessor">
+            <summary>
+            Represents the default implementation of the <see cref="T:Neuroglia.AspNetCore.Http.IIstioHeadersAccessor"/> interface
+            </summary>
+        </member>
+        <member name="M:Neuroglia.AspNetCore.Http.IstioHeadersAccessor.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Initializes a new <see cref="T:Neuroglia.AspNetCore.Http.IstioHeadersAccessor"/>
+            </summary>
+            <param name="httpContextAccessor">The service used to access the current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+        </member>
+        <member name="P:Neuroglia.AspNetCore.Http.IstioHeadersAccessor.HttpContextAccessor">
+            <summary>
+            Gets the service used to access the current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>
+            </summary>
+        </member>
+        <member name="P:Neuroglia.AspNetCore.Http.IstioHeadersAccessor.IstioHeaders">
+            <inheritdoc/>
+        </member>
+        <member name="T:Neuroglia.AspNetCore.Http.IstioHeadersPropagationDelegatingHandler">
+            <summary>
+            Represents a <see cref="T:System.Net.Http.DelegatingHandler"/> used to propagate Istio headers
+            </summary>
+        </member>
+        <member name="M:Neuroglia.AspNetCore.Http.IstioHeadersPropagationDelegatingHandler.#ctor(Neuroglia.AspNetCore.Http.IIstioHeadersAccessor)">
+            <summary>
+            Initializes a new <see cref="T:Neuroglia.AspNetCore.Http.IstioHeadersPropagationDelegatingHandler"/>
+            </summary>
+            <param name="istioHeadersAccessor">The service used to access incoming Istio headers</param>
+        </member>
+        <member name="P:Neuroglia.AspNetCore.Http.IstioHeadersPropagationDelegatingHandler.IstioHeadersAccessor">
+            <summary>
+            Gets the service used to access incoming Istio headers
+            </summary>
+        </member>
+        <member name="M:Neuroglia.AspNetCore.Http.IstioHeadersPropagationDelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Neuroglia.AspNetCore.Http.IstioHeadersPropagationMessageHandlerBuilderFilter">
+            <summary>
+            Represents an <see cref="T:Microsoft.Extensions.Http.IHttpMessageHandlerBuilderFilter"/> used to configure an <see cref="T:Microsoft.Extensions.Http.HttpMessageHandlerBuilder"/> to propagate Istio headers
+            </summary>
+        </member>
+        <member name="M:Neuroglia.AspNetCore.Http.IstioHeadersPropagationMessageHandlerBuilderFilter.#ctor(Neuroglia.AspNetCore.Http.IstioHeadersPropagationDelegatingHandler)">
+            <summary>
+            Initializes a new <see cref="T:Neuroglia.AspNetCore.Http.IstioHeadersPropagationMessageHandlerBuilderFilter"/>
+            </summary>
+            <param name="istioHeadersPropagationDelegatingHandler">The <see cref="T:System.Net.Http.DelegatingHandler"/> used to propagate Istio headers</param>
+        </member>
+        <member name="P:Neuroglia.AspNetCore.Http.IstioHeadersPropagationMessageHandlerBuilderFilter.IstioHeadersPropagationDelegatingHandler">
+            <summary>
+            Gets the <see cref="T:System.Net.Http.DelegatingHandler"/> used to propagate Istio headers
+            </summary>
+        </member>
+        <member name="M:Neuroglia.AspNetCore.Http.IstioHeadersPropagationMessageHandlerBuilderFilter.Configure(System.Action{Microsoft.Extensions.Http.HttpMessageHandlerBuilder})">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
