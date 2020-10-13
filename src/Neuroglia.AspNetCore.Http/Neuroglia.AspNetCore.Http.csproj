@@ -21,6 +21,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageIcon>logo_white.jpg</PackageIcon>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
